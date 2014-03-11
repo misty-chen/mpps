@@ -15,6 +15,6 @@
         <a style="color:#929292;">#1 in Commercial Real Estate Online</a>
     </div>
         <asp:Literal runat="server" ID="PlaceHolder" />
-    </div>
+    </div>  
 </body>
 </html>
