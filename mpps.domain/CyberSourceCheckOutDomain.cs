@@ -190,7 +190,9 @@ namespace mpps.domain
             item.AuthorizedAmount = decimal.Parse( values["auth_amount"]);
             item.PaymentTokenID = values["payment_token"];
             item.TransactionID = values["transaction_id"];
-            item.ReferenceNumber = values["req_reference_number"];            
+            item.ReferenceNumber = values["req_reference_number"];
+            item.ReasonCode = values["reason_code"];
+            item.Message = values["message"];            
             return item;
         }
 

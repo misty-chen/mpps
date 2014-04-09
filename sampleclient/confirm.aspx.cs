@@ -28,7 +28,9 @@ namespace sampleclient
                 }
                 else
                 {
-                    sb.Append("<h1>Sorry,  it failed to process your payment<.h>");
+                    sb.Append("<h3>Sorry, but we failed to process your payment</h3>");
+                    sb.Append("<p>Reason Code:" + Request.Form["ReasonCode"] + "</p>");
+                    sb.Append("<p>" + Request.Form["Message"] + "</p>");
                 }
 
                 PlaceHolder.Text = sb.ToString();

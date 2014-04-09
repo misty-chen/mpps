@@ -1,6 +1,6 @@
 ﻿/// <reference path="jquery-2.1.0.js" />
 var mpps = mpps ||  {};
-mpps.checkout = function (profileId, transactionType, referenceId, mppsUrl, responseUrl, cancelUrl, contactInfo, cart) {
+mpps.checkout = function (profileId, transactionType, referenceId, mppsUrl,  contactInfo, cart) {
     $("#payment_page").empty();
     //$("#payment_page").append("<iframe src='http://docs.angularjs.org/guide/' />");
 
@@ -23,8 +23,8 @@ mpps.checkout = function (profileId, transactionType, referenceId, mppsUrl, resp
     frame.document.write('<input type="hidden" name="PaymentDetail.BillingAddress.EmailAddress" value="' + contactInfo.EmailAddress + '" size="25" />');
     frame.document.write('<input type="hidden" name="TranactionType" value="0">');
     frame.document.write('<input type="hidden" id="ReferenceNumber" name="PaymentDetail.ReferenceNumber" value="0"> ');
-    frame.document.write('<input type="hidden" id="ResponseUrl" name="ResponseUrl"  value="' + responseUrl + '">');
-    frame.document.write('<input type="hidden" id="CancelUrl" name="CancelUrl"  value="' + cancelUrl + '">');
+    frame.document.write('<input type="hidden" id="ResponseUrl" name="ResponseUrl"  value="' + '' + '">');
+    frame.document.write('<input type="hidden" id="CancelUrl" name="CancelUrl"  value="' + '' + '">');
     frame.document.write('<input type="hidden" name="PaymentDetail.TaxAmount" value="' + cart.tax + '" id="TaxAmount" size="25" />');
     frame.document.write('<input type="hidden" name="PaymentDetail.TotalAmount" id="TotalAmount" value="' + cart.amount + '"  size="25" />');
     frame.document.write('<input type="hidden" name="PaymentDetail.Currency" value="USD" />');

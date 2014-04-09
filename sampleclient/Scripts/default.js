@@ -18,31 +18,10 @@
     $("#contact_form  input").change(function () {
         doCheckout();
     });
-    //$("#oneClick").click(function (e) {
-    //    $("#paymentTokenDialog").dialog("open");
-    //   // e.preventDefault();
-    //});
 
-    //$("#paymentTokenDialog").dialog({
-    //    autoOpen: false,
-    //    height: 300,
-    //    width: 350,
-    //    modal: true,
-    //    buttons: {
-    //        Ok: function () {
-    //            if ($("#PaymentTokenID").val().length <= 0) {
-    //                alert("PaymentTokenID is required");
-    //            }
-    //            else {
-    //                $(this).dialog("close");
-    //                $("#payment_form").submit();
-    //            }
-    //        },
-    //        Cancel: function () {
-    //            $(this).dialog("close");
-    //        }
-    //    }        
-    //});
+    $("#productPrice").change(function () {
+        doCheckout();
+    });
     if (window.addEventListener) {
         window.addEventListener("message", receive, false);
     }
@@ -67,6 +46,8 @@
             $('#responseForm').append('<input type="hidden" name="ReferenceNumber" value="' + data.response.ReferenceNumber + '">');
             $('#responseForm').append('<input type="hidden" name="PaymentTokenID" value="' + data.response.PaymentTokenID + '">');
             $('#responseForm').append('<input type="hidden" name="decision" value="' + data.response.Decision + '">');
+            $('#responseForm').append('<input type="hidden" name="ReasonCode" value="' + data.response.ReasonCode + '">');
+            $('#responseForm').append('<input type="hidden" name="Message" value="' + data.response.Message + '">');
             $('#responseForm').submit();
         }
     }
@@ -121,8 +102,8 @@ function computeAmount() {
 }
 
 function doCheckout() {
-    var mmpsUrl = 'http://devvmecom02.us.costar.local/api/CheckOut/';
-    //var mmpsUrl = 'http://localhost:51400/api/CheckOut/';
+    //var mmpsUrl = 'http://devvmecom02.us.costar.local/api/CheckOut/';
+    var mmpsUrl = 'http://localhost:51400/api/CheckOut/';
     var amount = new Number( $("#productPrice").val());
     var tax = Math.round((amount * 7 / 100) * 100) / 100;
 
@@ -132,5 +113,5 @@ function doCheckout() {
     });
     var referenceNumber = new Date().getMilliseconds();
 
-    mpps.checkout(1, 0, referenceNumber, mmpsUrl, responseUrl, cancelUrl, contactInfo, { amount: amount+tax, tax: tax });
+    mpps.checkout(1, 0, referenceNumber, mmpsUrl, contactInfo, { amount: amount+tax, tax: tax });
 }
