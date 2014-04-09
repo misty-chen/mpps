@@ -41,6 +41,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -135,11 +138,13 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\production.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="response.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\mppsclient.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
   </ItemGroup>
@@ -151,7 +156,15 @@
     <Compile Include="confirm.aspx.designer.cs">
       <DependentUpon>confirm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ObjectExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="response.aspx.cs">
+      <DependentUpon>response.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="response.aspx.designer.cs">
+      <DependentUpon>response.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

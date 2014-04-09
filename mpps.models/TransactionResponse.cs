@@ -10,7 +10,7 @@ namespace mpps.models
     {
         public string Decision { get; set; }
         public string TransactionID { get; set; }
-        public decimal AuthoriizedAmount { get; set; }
+        public decimal AuthorizedAmount { get; set; }
         public string PaymentTokenID { get; set; }
         public string ReferenceNumber { get; set; }
         public int ErrorCode { get; set; }

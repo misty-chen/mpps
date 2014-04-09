@@ -94,6 +94,7 @@
     <Compile Include="CyberSourceCheckOutDomain.cs" />
     <Compile Include="ICheckoutDomain.cs" />
     <Compile Include="IProfileDomain.cs" />
+    <Compile Include="ObjectExtension.cs" />
     <Compile Include="ProfileDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

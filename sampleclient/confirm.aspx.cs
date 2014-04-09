@@ -20,7 +20,7 @@ namespace sampleclient
                 {
                     sb.Append("<h3>Thank you for your order</h3>");
                     sb.Append("<ul>");
-                    sb.Append(string.Format("<li>Authorized Amount: {0:c}</li>", decimal.Parse(Request.Form["AuthoriizedAmount"])));
+                    sb.Append(string.Format("<li>Authorized Amount: {0:c}</li>", decimal.Parse(Request.Form["AuthorizedAmount"])));
                     sb.Append(string.Format("<li>Transaction ID: {0:c}</li>", Request.Form["TransactionID"]));
                     sb.Append(string.Format("<li>Reference Number: {0}</li>", Request.Form["ReferenceNumber"]));
                     sb.Append(string.Format("<li>PaymentTokenID {0}</li>", Request.Form["PaymentTokenID"]));

@@ -77,30 +77,81 @@ namespace mpps.domain
             return htmlContent;
         }
 
+//        public string ProcessResponse(int profileID, string reponseUrl, NameValueCollection values)
+//        {
+//            var item = ProcessResponse(values);
+//            var properties = item.GetType().GetProperties();
+
+//            StringBuilder sb = new StringBuilder();
+//            sb.Append("<form id=\"custom\" action=\"" + reponseUrl + "\" method=\"post\"/>");
+
+//            foreach (var p in properties)
+//            {
+//                sb.Append("<input type=\"hidden\" id=\"" + p.Name + "\" name=\"" + p.Name + "\" value=\"" + p.GetValue(item) + "\"/>\n");
+//            }
+//            sb.Append("</form>");
+
+//            string htmlContent = @"
+//<html>
+//<head>
+//  <title></title>
+//  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
+//</head>
+//<body>" + sb.ToString() +
+//@"<script type='text/javascript'>
+//    $(function () {
+//        $('#custom').submit();
+//    });
+//</script>
+//</body>
+//</html>
+//";
+//            return htmlContent;
+
+//        }
+
+//        public string ProcessCancel(int profileID, string cancelUrl, NameValueCollection values)
+//        {
+//            StringBuilder sb = new StringBuilder();
+//            sb.Append("<form id=\"custom\" action=\"" + cancelUrl + "\" method=\"post\"/>");
+
+          
+//            sb.Append("</form>");
+
+//            string htmlContent = @"
+//<html>
+//<head>
+//  <title></title>
+//  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
+//</head>
+//<body>" + sb.ToString() +
+//@"<script type='text/javascript'>
+//    $(function () {
+//        $('#custom').submit();
+//    });
+//</script>
+//</body>
+//</html>
+//";
+//            return htmlContent;
+
+//        }
+
         public string ProcessResponse(int profileID, string reponseUrl, NameValueCollection values)
         {
             var item = ProcessResponse(values);
-            var properties = item.GetType().GetProperties();
-
+            
             StringBuilder sb = new StringBuilder();
-            sb.Append("<form id=\"custom\" action=\"" + reponseUrl + "\" method=\"post\"/>");
-
-            foreach (var p in properties)
-            {
-                sb.Append("<input type=\"hidden\" id=\"" + p.Name + "\" name=\"" + p.Name + "\" value=\"" + p.GetValue(item) + "\"/>\n");
-            }
-            sb.Append("</form>");
-
             string htmlContent = @"
 <html>
 <head>
-  <title></title>
-  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
+    <title></title>
+    <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
 </head>
 <body>" + sb.ToString() +
 @"<script type='text/javascript'>
     $(function () {
-        $('#custom').submit();
+         window.parent.window.postMessage({'type':'response', 'response':" + item.ToJSON() +  @"},'*');
     });
 </script>
 </body>
@@ -109,25 +160,19 @@ namespace mpps.domain
             return htmlContent;
 
         }
-
         public string ProcessCancel(int profileID, string cancelUrl, NameValueCollection values)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<form id=\"custom\" action=\"" + cancelUrl + "\" method=\"post\"/>");
-
-          
-            sb.Append("</form>");
-
             string htmlContent = @"
 <html>
 <head>
-  <title></title>
-  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
+    <title></title>
+    <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
 </head>
 <body>" + sb.ToString() +
 @"<script type='text/javascript'>
     $(function () {
-        $('#custom').submit();
+         window.parent.window.postMessage({'type':'cancel'},'*');
     });
 </script>
 </body>
@@ -142,7 +187,7 @@ namespace mpps.domain
         {
             var item = new TransactionResponse();
             item.Decision = values["decision"];
-            item.AuthoriizedAmount = decimal.Parse( values["auth_amount"]);
+            item.AuthorizedAmount = decimal.Parse( values["auth_amount"]);
             item.PaymentTokenID = values["payment_token"];
             item.TransactionID = values["transaction_id"];
             item.ReferenceNumber = values["req_reference_number"];            
