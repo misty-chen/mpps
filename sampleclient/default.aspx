@@ -97,5 +97,5 @@
 </script>
 <script src="/Scripts/default.js" type="text/javascript">
 </script>
-<script src="/Scripts/mppsclient.js" type="text/javascript">
+<script src="http://devvmecom02.us.costar.local/scripts/mppsclient.js" type="text/javascript">
 </script>

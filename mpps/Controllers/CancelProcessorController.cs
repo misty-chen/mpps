@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Text;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using mpps.domain;
@@ -23,6 +24,7 @@ namespace mpps.Controllers
         
         public HttpResponseMessage Post(int profileID, string cancelUrl, [FromBody]FormDataCollection formValues)
         {
+            HttpContext.Current.Response.AppendHeader("p3p", "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\"");
             try
             {
                 var content = _checkOutDomain.ProcessCancel(profileID, cancelUrl, formValues.ReadAsNameValueCollection());

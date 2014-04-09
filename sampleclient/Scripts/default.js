@@ -102,8 +102,8 @@ function computeAmount() {
 }
 
 function doCheckout() {
-    //var mmpsUrl = 'http://devvmecom02.us.costar.local/api/CheckOut/';
-    var mmpsUrl = 'http://localhost:51400/api/CheckOut/';
+    var mmpsUrl = 'http://devvmecom02.us.costar.local/api/CheckOut/';
+    //var mmpsUrl = 'http://localhost:51400/api/CheckOut/';
     var amount = new Number( $("#productPrice").val());
     var tax = Math.round((amount * 7 / 100) * 100) / 100;
 

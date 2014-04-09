@@ -31,6 +31,7 @@ namespace mpps.Controllers
          [ResponseType(typeof(string))]
         public HttpResponseMessage Post([FromBody]PaymentRequest request)
         {
+            HttpContext.Current.Response.AppendHeader("p3p", "CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\"");
             try
             {
                 var profile = _profileDomain.Get(request.ProfileID);
