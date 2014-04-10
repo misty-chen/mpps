@@ -77,67 +77,77 @@ namespace mpps.domain
             return htmlContent;
         }
 
-//        public string ProcessResponse(int profileID, string reponseUrl, NameValueCollection values)
-//        {
-//            var item = ProcessResponse(values);
-//            var properties = item.GetType().GetProperties();
+        public string ProcessResponse(int profileID, string responseUrl, NameValueCollection values)
+        {
+            if (String.IsNullOrWhiteSpace(responseUrl))
+            {
+                return ProcessResponse(profileID, values);
+            }
 
-//            StringBuilder sb = new StringBuilder();
-//            sb.Append("<form id=\"custom\" action=\"" + reponseUrl + "\" method=\"post\"/>");
+            var item = ProcessResponse(values);
+            var properties = item.GetType().GetProperties();
 
-//            foreach (var p in properties)
-//            {
-//                sb.Append("<input type=\"hidden\" id=\"" + p.Name + "\" name=\"" + p.Name + "\" value=\"" + p.GetValue(item) + "\"/>\n");
-//            }
-//            sb.Append("</form>");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<form id=\"custom\" action=\"" + responseUrl + "\" method=\"post\"/>");
 
-//            string htmlContent = @"
-//<html>
-//<head>
-//  <title></title>
-//  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
-//</head>
-//<body>" + sb.ToString() +
-//@"<script type='text/javascript'>
-//    $(function () {
-//        $('#custom').submit();
-//    });
-//</script>
-//</body>
-//</html>
-//";
-//            return htmlContent;
+            foreach (var p in properties)
+            {
+                sb.Append("<input type=\"hidden\" id=\"" + p.Name + "\" name=\"" + p.Name + "\" value=\"" + p.GetValue(item) + "\"/>\n");
+            }
+            sb.Append("</form>");
 
-//        }
+            string htmlContent = @"
+<html>
+<head>
+  <title></title>
+  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
+</head>
+<body>" + sb.ToString() +
+@"<script type='text/javascript'>
+    $(function () {
+        $('#custom').submit();
+    });
+</script>
+</body>
+</html>
+";
+            return htmlContent;
 
-//        public string ProcessCancel(int profileID, string cancelUrl, NameValueCollection values)
-//        {
-//            StringBuilder sb = new StringBuilder();
-//            sb.Append("<form id=\"custom\" action=\"" + cancelUrl + "\" method=\"post\"/>");
+        }
 
-          
-//            sb.Append("</form>");
+        public string ProcessCancel(int profileID, string cancelUrl, NameValueCollection values)
+        {
+            if (String.IsNullOrWhiteSpace(cancelUrl))
+            {
+                return ProcessCancel(profileID, values);
+            }
 
-//            string htmlContent = @"
-//<html>
-//<head>
-//  <title></title>
-//  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
-//</head>
-//<body>" + sb.ToString() +
-//@"<script type='text/javascript'>
-//    $(function () {
-//        $('#custom').submit();
-//    });
-//</script>
-//</body>
-//</html>
-//";
-//            return htmlContent;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<form id=\"custom\" action=\"" + cancelUrl + "\" method=\"post\"/>");
 
-//        }
 
-        public string ProcessResponse(int profileID, string reponseUrl, NameValueCollection values)
+            sb.Append("</form>");
+
+            string htmlContent = @"
+<html>
+<head>
+  <title></title>
+  <script src='/scripts/jquery-2.1.0.min.js' type='text/javascript'></script>  
+</head>
+<body>" + sb.ToString() +
+@"<script type='text/javascript'>
+    $(function () {
+        $('#custom').submit();
+    });
+</script>
+</body>
+</html>
+";
+            return htmlContent;
+
+        }
+
+        private string ProcessResponse(int profileID, NameValueCollection values)
         {
             var item = ProcessResponse(values);
             
@@ -160,7 +170,7 @@ namespace mpps.domain
             return htmlContent;
 
         }
-        public string ProcessCancel(int profileID, string cancelUrl, NameValueCollection values)
+        private string ProcessCancel(int profileID,  NameValueCollection values)
         {
             StringBuilder sb = new StringBuilder();
             string htmlContent = @"
