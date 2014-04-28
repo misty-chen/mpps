@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Linq;
 using mpps.models;
 
 namespace mpps.domain
@@ -15,8 +16,8 @@ namespace mpps.domain
         public string Authorize(Profile profile, PaymentDetail paymentDetail, string responseUrl, string cancelUrl)
         {
             IDictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("access_key", profile.Provider.ProviderPassword);
-            parameters.Add("profile_id", profile.Provider.ProviderLogin);
+            parameters.Add("access_key", profile.Provider.ProviderSettings.First(p => p.SettingName == "password").SettingValue);
+            parameters.Add("profile_id", profile.Provider.ProviderSettings.First(p => p.SettingName == "login").SettingValue);
             parameters.Add("transaction_uuid", getUUID());
             parameters.Add("signed_field_names", "access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,tax_amount,currency,bill_to_forename,bill_to_surname,bill_to_address_city,bill_to_address_country,bill_to_address_line1,bill_to_address_line2,bill_to_address_state,bill_to_address_postal_code,bill_to_email,override_custom_receipt_page,override_custom_cancel_page,payment_token");
             parameters.Add("unsigned_field_names", "");
@@ -50,13 +51,13 @@ namespace mpps.domain
             parameters.Add("payment_token", paymentDetail.PaymentTokenID);
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("<form id=\"custom\" action=\"" + profile.Provider.ServiceUrl + "\" method=\"post\"/>");
+            sb.Append("<form id=\"custom\" action=\"" + profile.Provider.ProviderSettings.First(p => p.SettingName == "payurl").SettingValue + "\" method=\"post\"/>");
 
             foreach (var p in parameters)
             {
                 sb.Append("<input type=\"hidden\" id=\"" + p.Key + "\" name=\"" + p.Key + "\" value=\"" + p.Value + "\"/>\n");
             }
-            sb.Append("<input type=\"hidden\" id=\"signature\" name=\"signature\" value=\"" + Sign(parameters, profile.Provider.ProviderSecret) + "\"/>\n");
+            sb.Append("<input type=\"hidden\" id=\"signature\" name=\"signature\" value=\"" + Sign(parameters, profile.Provider.ProviderSettings.First(p => p.SettingName == "secret").SettingValue) + "\"/>\n");
             sb.Append("</form>");
 
             string htmlContent = @"
@@ -76,6 +77,7 @@ namespace mpps.domain
 ";
             return htmlContent;
         }
+       
 
         public string ProcessResponse(int profileID, string responseUrl, NameValueCollection values)
         {
@@ -197,7 +199,7 @@ namespace mpps.domain
         {
             var item = new TransactionResponse();
             item.Decision = values["decision"];
-            item.AuthorizedAmount = decimal.Parse( values["auth_amount"]);
+            item.AuthorizedAmount = values["auth_amount"] == null? 0 : decimal.Parse( values["auth_amount"]);
             item.PaymentTokenID = values["payment_token"];
             item.TransactionID = values["transaction_id"];
             item.ReferenceNumber = values["req_reference_number"];
@@ -206,12 +208,12 @@ namespace mpps.domain
             return item;
         }
 
-        private static String Sign(IDictionary<string, string> paramsArray, String secretKey)
+        public static String Sign(IDictionary<string, string> paramsArray, String secretKey)
         {
             return Sign(BuildDataToSign(paramsArray), secretKey);
         }
 
-        private static String Sign(String data, String secretKey)
+        public static String Sign(String data, String secretKey)
         {
             UTF8Encoding encoding = new System.Text.UTF8Encoding();
             byte[] keyByte = encoding.GetBytes(secretKey);
@@ -221,7 +223,7 @@ namespace mpps.domain
             return Convert.ToBase64String(hmacsha256.ComputeHash(messageBytes));
         }
 
-        private static String BuildDataToSign(IDictionary<string, string> paramsArray)
+        public static String BuildDataToSign(IDictionary<string, string> paramsArray)
         {
             String[] signedFieldNames = paramsArray["signed_field_names"].Split(',');
             IList<string> dataToSign = new List<string>();
@@ -238,12 +240,12 @@ namespace mpps.domain
         {
             return String.Join(",", dataToSign);
         }
-        private static String getUUID()
+        public static String getUUID()
         {
             return System.Guid.NewGuid().ToString();
         }
 
-        private static String getUTCDateTime()
+        public static String getUTCDateTime()
         {
             DateTime time = DateTime.Now.ToUniversalTime();
             return time.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'");

@@ -12,7 +12,7 @@ namespace mpps.domain
         {
             using (var db = new mpps.models.mppsEntities())
             {
-                return db.Profiles.Include("Provider").FirstOrDefault(p => p.ProfileID == profileId);
+                return db.Profiles.Include("Provider").Include("Provider.ProviderSettings").FirstOrDefault(p => p.ProfileID == profileId);
             }
         }
     }

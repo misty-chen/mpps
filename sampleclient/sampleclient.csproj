@@ -139,6 +139,7 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\production.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="paymenttoken.aspx" />
     <Content Include="response.aspx" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
@@ -146,6 +147,7 @@
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
     <Content Include="Scripts\original.js" />
+    <Content Include="Scripts\paymenttoken.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
   </ItemGroup>
@@ -164,6 +166,13 @@
     </Compile>
     <Compile Include="original.aspx.designer.cs">
       <DependentUpon>original.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="paymenttoken.aspx.cs">
+      <DependentUpon>paymenttoken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="paymenttoken.aspx.designer.cs">
+      <DependentUpon>paymenttoken.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="response.aspx.cs">

@@ -498,5 +498,13 @@
             <param name="amount"></param>
             <returns></returns>
         </member>
+        <member name="M:mpps.Controllers.PaymentTokenController.Post(mpps.models.PaymentRequest)">
+            <summary>
+            This method processes Authorize and AuthorizeCapture transactions.  These type of transactions require entry of credit info and implemented as a hosted solution.
+            As response, the method returns a web page with the credit payment form.  Result of the transaction is returned to the caller via the response url.
+            </summary>
+            <param name="request"></param>
+            <returns>html mark with hidden form or an error message</returns>
+        </member>
     </members>
 </doc>

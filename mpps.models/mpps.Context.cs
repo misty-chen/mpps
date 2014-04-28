@@ -29,5 +29,6 @@ namespace mpps.models
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Provider> Providers { get; set; }
         public DbSet<ProviderType> ProviderTypes { get; set; }
+        public DbSet<ProviderSetting> ProviderSettings { get; set; }
     }
 }

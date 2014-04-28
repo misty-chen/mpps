@@ -18,18 +18,16 @@ namespace mpps.models
         {
             this.PaymentTokens = new HashSet<PaymentToken>();
             this.Profiles = new HashSet<Profile>();
+            this.ProviderSettings = new HashSet<ProviderSetting>();
         }
     
         public int ProviderID { get; set; }
         public string ProviderName { get; set; }
         public int ProviderTypeID { get; set; }
-        public string ServiceUrl { get; set; }
-        public string ProviderLogin { get; set; }
-        public string ProviderPassword { get; set; }
-        public string ProviderSecret { get; set; }
     
         public virtual ICollection<PaymentToken> PaymentTokens { get; set; }
         public virtual ICollection<Profile> Profiles { get; set; }
         public virtual ProviderType ProviderType { get; set; }
+        public virtual ICollection<ProviderSetting> ProviderSettings { get; set; }
     }
 }

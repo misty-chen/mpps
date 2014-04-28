@@ -76,6 +76,9 @@
     <Compile Include="Provider.cs">
       <DependentUpon>mpps.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProviderSetting.cs">
+      <DependentUpon>mpps.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProviderType.cs">
       <DependentUpon>mpps.tt</DependentUpon>
     </Compile>

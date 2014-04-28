@@ -92,7 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CyberSourceCheckOutDomain.cs" />
+    <Compile Include="cyberSourcePaymentToken.cs" />
     <Compile Include="ICheckoutDomain.cs" />
+    <Compile Include="IPaymentToken.cs" />
     <Compile Include="IProfileDomain.cs" />
     <Compile Include="ObjectExtension.cs" />
     <Compile Include="ProfileDomain.cs" />

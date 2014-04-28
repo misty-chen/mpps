@@ -12,6 +12,8 @@
         <AssociationConnector Association="mppsModel.FK_PaymentToken_Provider" ManuallyRouted="false" />
         <AssociationConnector Association="mppsModel.FK_Profile_Provider" ManuallyRouted="false" />
         <AssociationConnector Association="mppsModel.FK_Provider_ProviderType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="mppsModel.ProviderSetting" Width="1.5" PointX="4.625" PointY="6" />
+        <AssociationConnector Association="mppsModel.FK_ProviderSetting_Provider" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -21,6 +21,7 @@ namespace mpps
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // Register other dependencies.
+            builder.Register(c => new CyberSourcePaymentToken()).As<IPaymentTokenDomain>().InstancePerApiRequest();
             builder.Register(c => new CyberSourceCheckOutDomain()).As<ICheckOutDomain>().InstancePerApiRequest();
             builder.Register(c => new ProfileDomain()).As<IProfileDomain>().InstancePerApiRequest();
 
