@@ -40,7 +40,9 @@ namespace mpps.Controllers
                 var cancelUrl = Url.Link("DefaultApi", new { controller = "CancelProcessor" });
                 cancelUrl = cancelUrl + "?ProfileID=" + request.ProfileID.ToString() + "&cancelUrl=" + HttpUtility.UrlEncode(request.CancelUrl);
 
-                var content = _paymentTokenDomain.Create(profile, request.PaymentDetail.BillingAddress, responseUrl, cancelUrl);
+                var content = !String.IsNullOrWhiteSpace(request.PaymentDetail.PaymentTokenID)?
+                    _paymentTokenDomain.Update(profile, request.PaymentDetail.PaymentTokenID, request.PaymentDetail.BillingAddress, responseUrl, cancelUrl) 
+                    :_paymentTokenDomain.Create(profile, request.PaymentDetail.BillingAddress, responseUrl, cancelUrl);
                 return new HttpResponseMessage
                 {
                     Content = new StringContent(
@@ -54,6 +56,8 @@ namespace mpps.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exp);
             }
         }
+
+        
 
     }
 }

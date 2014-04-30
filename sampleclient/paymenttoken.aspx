@@ -26,6 +26,14 @@
         </form>        
         <button id="createPaymentToken">Create Payment Token</button>
        </div>
+        <br />
+        <br />
+         <br />
+        <br />
+        <form id="token_form"  method="post">
+            <label class="fieldName">Payment Token:</label><input type="text" id="PaymentToken" value="" />         
+        </form>    
+        <button id="updatePaymentToken">Update Payment Token</button>
 </body>
 <script>
         var responseUrl = "<%=Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.SafeUnescaped) + ResolveUrl("~/confirm.aspx") %>";
